@@ -205,3 +205,30 @@ if (!empty($var3)) {
 echo $maVar ?? 'valeur par defaut'; # affiche la valeur si elle existe, sinon message default. Pourrait par exemple etre utilisé pour laisser les valeurs saisies par un internaute dans un formulaire
 
 ?>
+
+<?php
+echo '<hr><h2> Conditions switch </h2><br>';
+// le switch est une autre methode pour ecrire une condition if / elseif / else lorsqu'on veut comparer des valeurs multiples
+$langue = 'Espagnol';
+switch ($langue) { # Contrairement a js, php ne teste ici que la valeur, js compare la valeur et le typage
+    case 'Francais':
+        echo 'Bonjour !';
+    break;
+    case 'Chinois':
+        echo 'Ni hao !';
+    break;
+    case 'Italien':
+        echo 'Buongiorno !';
+    break;
+    case 'Espagnol':
+        echo '¡ Hola !';
+    break;
+    case 'Allemand':
+        echo 'Gutentag !';
+    break;
+    default:
+        echo 'Hello !';
+    break;
+}
+
+?>
