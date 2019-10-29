@@ -180,9 +180,28 @@ elseif ($varA === $varB) { # Là on fait une comparaison stricte sur la valeur e
     echo 'varA not === varB';
 }
 
-// isset() et empty()
+// Operateurs isset() et empty()
 $varTest="toto";
-echo(empty($varTest)) ? 'varTest est déclaré mais vide':"varTest est affecté et vaut $varTest";
 #$var=1;
+#$var1='toto';
+$var2='titi';
+
+echo(empty($varTest)) ? 'varTest est déclaré mais vide':"varTest est affecté et vaut $varTest";
 echo(isset($var))?'var est déclarée et non-nulle':'var n\'est pas definie ou est vide';
+
+if (empty($var1)) echo 'match car $var1 est vide, 0, NULL, FALSE ou non defini<br>';
+if (isset($var2)) echo 'match car $var2 existe et est non-null<br>';
+
+// Operateur not ( ! )
+$var3 = 'quelque chose';
+if (!empty($var3)) {
+    echo '$var3 est n\'est pas vide et vaut: '.$var3;
+}
+
+//phpinfo(); -> print de la version et de toutes les features installées
+
+// exo : afficher une valeur a condition qu'elle existe, avec l'operateur "null coalescent" ( s'ecrit "??" )
+#$maVar = "she's aliiiiiive";
+echo $maVar ?? 'valeur par defaut'; # affiche la valeur si elle existe, sinon message default. Pourrait par exemple etre utilisé pour laisser les valeurs saisies par un internaute dans un formulaire
+
 ?>
