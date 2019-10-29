@@ -1,0 +1,32 @@
+ - Définitions -
+
+Php : Hypertext préprocessor
+
+langage de programmation de scripts open source, spécifiquement concu pour developper des sites web, il est interpreté coté serveur.
+Il s'agit d'un langage fonctionnel (reception / traitement de données -> fonctionalité) utilisé dans la construction de sites dynamiques (les contenus ne sont pas destinés a etre codés en dur)
+
+(3 composants classiques d'un site dynamique : backoffice pour modifier les contenus en base, sql/php en backend, frontend client)
+
+- cas d'exemples -
+ - prenons un formulaire de connection :
+    1) php recoit les données saisies dans l'interface
+    2) Verifie le formulaire (valeurs de champs etc)
+    3) Interrogation de la base pour verification des données de connection
+    4) Traitement du sql : 
+        - Si ok -> balance sur page a car loggé
+        - si nok -> page b / message d'erreur
+
+ - programme -
+    J1-2.5 : les bases
+    J2.5-4 : les superglobales
+    J5-6 : PDO (php data object)
+    J7-10 : dev de site e-commerce
+
+- J1 =
+    - Introduction
+    - Les bases:
+        - balises php, affichage
+        - variables, concatenation, guillemets et quotes
+        - constantes, operateurs arithmetiques
+        - structures conditionnelles
+        - conditions, switchs
