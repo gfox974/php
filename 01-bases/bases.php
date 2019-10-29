@@ -230,5 +230,49 @@ switch ($langue) { # Contrairement a js, php ne teste ici que la valeur, js comp
         echo 'Hello !';
     break;
 }
+// exo : réecrire le switch precedent sous forme de ifs classiques pour obtenir le meme resultat
+if (!empty($langue)) {
+    if ($langue == 'Français') {
+        echo 'Bonjour !';
+    } else if ($langue == 'Chinois') {
+        echo 'Ni hao !';
+    }
+    else {
+        echo 'Hello';
+    }
+}
+// autre vite fait pour le fun
+$dicLang = array("Francais"=>"Bonjour","Chinois"=>"Ni hao","Allemand"=>"Gutentag"); $whichlang = "Chinois"; echo $dicLang[$whichlang];
+// correction :
+if ($langue == 'Francais') {
+    echo 'Bonjour !';
+} elseif ($langue == 'Italien') {
+    echo 'Buongiorno !';
+} elseif ($langue == 'Espagnol') {
+    echo '¡ Hola !';
+} else {
+    echo 'Hello';
+}
+?>
+
+<?php
+echo '<hr><h2> Fonctions prédéfinies </h2><br>';
+// Une fonction predefinie permet de réaliser un traitement spécifique, prédéterminée dans le langage php
+# strpos(); - string position
+$email1 = 'prenom@domaine.fr';
+echo strpos($email1, '@').'<br>'; # retourne 6, car @ est le 7eme carac (mais en l'etat s'arretera a la premiere occurence)
+# strlen() - string length
+$phrase = 'je suis une phrâse'; # retourne le nombre d'octets d'une chaine ( l'accent du a compte aussi en plus)
+echo strlen($phrase).'<br>';
+# Pour compter le nombre de caracteres au sens strict, il y a mb_strlen()
+# substr() - substitute string
+$text = 'je suis un tres, tres, tres long texte';
+echo substr($text, 0, 10).'....<a href="">lire la suite</a>'; # coupe une partie de la chaine de caractere entre les positions indiquées, ici entre 0 et 11
+# strtolower() - string to lower, strtoupper() - string to upper , trim() - virer les espaces
+$message = "      PaRce QuE Cay Notre Proo jeT    ";
+echo strtolower($message)."<br>";
+echo strtoupper($message)."<br>";
+echo '$message avec les espaces : '.strlen($message).'<br>';
+echo '$message sans les espaces : '.strlen(trim($message)).'<br>'; # trim ne vire que les espaces en debut et fin de chaine
 
 ?>
