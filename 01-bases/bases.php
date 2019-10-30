@@ -276,3 +276,138 @@ echo '$message avec les espaces : '.strlen($message).'<br>';
 echo '$message sans les espaces : '.strlen(trim($message)).'<br>'; # trim ne vire que les espaces en debut et fin de chaine
 
 ?>
+
+<?php
+echo '<hr><h2> Fonctions utilisateurs </h2><br>';
+// Une fonction est un morceau de code encapsulé dans des acolades et portant un nom,
+// On appelle la fonction au besoin pour l'executer
+
+// exemple de fonction sans parametres :
+function sayHello() {
+    echo 'Hello'.'<br><hr>';
+}
+
+sayHello();
+
+// Fonction avec parametre et return
+function mult($a,$b) {
+    return $a * $b;
+}
+$a = 2; $b = 5;
+echo mult($a,$b).'<br>';
+
+// Exercice :
+// Enonce  
+function exometeo($saison) {
+    echo "Nous sommes en $saison".'<br>';
+}
+// Faire en sorte que l'article "en" change en "au" pour le printemps
+function meteo($saison) {
+    $article = 'en';
+    if ($saison == 'Printemps') {
+        $article = 'au';
+    }
+    // TODO : ternaire pour le fun
+    echo "Nous sommes $article $saison<br>";
+}
+
+$saisons = ['Printemps','Ete','Automne','Hiver'];
+foreach( $saisons as $curSais ){
+    meteo($curSais);
+}
+
+// Exercice:
+// Ecrire une fonction facture essence qui calcule le cout total de votre plein en fonction du nombre de litres et le prix de ce dernier, elle doit retourner une estimation, il doit aussi y avoir une fonction prixliste qui donne le prix du litre
+function prixLitre() {
+    return 1.5;
+}
+
+function factureEssence($nblitres){
+    $prixlitre = prixLitre();
+    $facture = $nblitres * $prixlitre;
+    echo "Votre facture est de $facture € pour $nblitres litres<br>";
+}
+factureEssence(20);
+
+// autre pour le fun
+/* TODO -> reste a passer des variables comme args de propriétés
+class essence {
+    const Diesel = '1.5';
+    const Essence = '1.4';
+
+    function affichePrix($typeCarbu){
+        echo self::$typeCarbu;
+    }
+    function afficheDiesel(){
+        echo self::Diesel;
+    }
+    function estimePlein($litres,$typeCarbu) {
+        $estim = $litres * $this.$typeCarbu;
+        return $estim;
+    }
+}
+
+class Diesel extends essence {
+
+}
+
+$litres = 10; $type = 'Diesel';
+//$estime = new essence.estimePlein($litres,$type);
+echo(essence::afficheDiesel());
+echo(essence::affichePrix($type));
+*/
+// Depuis PHP7 on peut preciser le type des valeurs entrantes dans une fonction :
+function identité(string $nom,int $age){ // on peut typer les variables array, bool, string, int, float, etc..
+    echo gettype($nom).'<br>';
+    echo gettype($age).'<br>';
+    return $nom.' a '.$age.' ans<br>';
+}
+echo identité('gerard',53);
+#echo identité('gerard','53'); // Ca marche quand meme, car l'interpreteur n'est pas en mode strict par defaut, alors il convertis la valeur du string en int (parce que la valeur telle qu'elle est transformable)
+// Depuis PHP7, on peut typer la valeur de retour que doit sortir la fonction. (obligatoire en mode strict)
+function isAdult(int $age) : bool {
+    if($age >= 18) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+var_dump(isAdult(7)); # retourne false, le return est bien une valeur booléene
+
+?>
+
+<?php
+echo '<hr><h2> Espace local / Espace global (scopes) </h2><br>';
+// 1) Aller de l'espace local à l'espace global
+function jour(){
+    $jour = 'Mercredi'; # variable locale, car déclarée dans l'espace memoire de la fonction
+    return $jour;
+}
+#echo $jour; // va se vautrer en undefined, car elle n'existe qu'au sein de la fonction appellée. Il faut la sortir de la fonction avec return. 
+echo jour();
+// 2) Aller de l'espace global vers l'espace local
+$pays = 'France'; # variable globale, car déclarée à l'exterieur de toute fonction
+function pays() {
+    global $pays; # le mot clé global permet de recuperer une variable globale à l'exterieur de l'espace local
+    echo $pays;
+}
+pays();
+
+?>
+
+<?php
+echo '<hr><h2> Les boucles </h2><br>';
+// les boucles (structures itératives) sont destinées à repeter des lignes de code de facon automatique
+
+// Boucle WHILE
+$i = 0; # Valeur de départ, va servir a comptabiliser le nombre de tours
+while ($i < 3) { #Tant que i est inferieur a trois, loop
+    echo "iteration : $i<br>";
+    $i++; # i +1 a chaque tour
+}
+echo "Il y a eu $i iterations.";
+// ne jamais oublier de definir les conditions de sortie d'un while, sinon boucle infinie.
+
+
+?>
