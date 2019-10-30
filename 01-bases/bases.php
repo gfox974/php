@@ -4,6 +4,9 @@
         border-bottom: 1px solid black;
         color: grey;
     }
+    table, tr, td {
+        border: solid 1px;
+    }
 </style>
 
 <!-- Ici, on commence le bloc en php : -->
@@ -330,32 +333,31 @@ function factureEssence($nblitres){
 factureEssence(20);
 
 // autre pour le fun
-/* TODO -> reste a passer des variables comme args de propriétés
 class essence {
-    const Diesel = '1.5';
-    const Essence = '1.4';
+    static $Diesel = '1.5';
+    static $Essence = '1.4';
 
     function affichePrix($typeCarbu){
-        echo self::$typeCarbu;
+        echo self::$$typeCarbu; # todo: Interpole ma variable sombre pute ! edit: variable par reference fonctionne, pas utiliser de constantes ..
     }
     function afficheDiesel(){
         echo self::Diesel;
     }
+    function afficheEssence(){
+        echo self::Essence;
+    }
     function estimePlein($litres,$typeCarbu) {
-        $estim = $litres * $this.$typeCarbu;
+        $estim = $litres * self::$$typeCarbu;
         return $estim;
     }
 }
 
-class Diesel extends essence {
-
-}
-
 $litres = 10; $type = 'Diesel';
-//$estime = new essence.estimePlein($litres,$type);
-echo(essence::afficheDiesel());
-echo(essence::affichePrix($type));
-*/
+#echo(essence::afficheDiesel()).'<br>';
+#echo(essence::afficheEssence()).'<br>';
+#echo(essence::affichePrix($type));
+echo "votre plein de $litres litres de $type va vous couter ".(essence::estimePlein($litres,$type)).'€.';
+
 // Depuis PHP7 on peut preciser le type des valeurs entrantes dans une fonction :
 function identité(string $nom,int $age){ // on peut typer les variables array, bool, string, int, float, etc..
     echo gettype($nom).'<br>';
@@ -398,6 +400,7 @@ pays();
 
 <?php
 echo '<hr><h2> Les boucles </h2><br>';
+echo '<hr><h3> Boucle while </h3><br>';
 // les boucles (structures itératives) sont destinées à repeter des lignes de code de facon automatique
 
 // Boucle WHILE
@@ -409,5 +412,155 @@ while ($i < 3) { #Tant que i est inferieur a trois, loop
 echo "Il y a eu $i iterations.";
 // ne jamais oublier de definir les conditions de sortie d'un while, sinon boucle infinie.
 
+// Exercice :
+// A l'aide d'une boucle while, afficher dans un selecteur (menu déroulant) les années depuis 1919 jusqu'a 2019
+/* Selecteur :
+echo <select>;
+    echo <option>1</option>
+    echo <option>2</option>
+    echo <option>3</option>
+    echo <option>etc</option>
+echo </select>
+*/
+$startYear = 1919;
+$endYear = 2019;
+// TODO pour le fun : des input pour le start / end
+function generateMenu($from,$To){
+    $whereAmI = $from;
+    echo '<br><select>';
+    while($whereAmI <= $To){
+        echo "<option>$whereAmI</option>";
+        $whereAmI++;
+    }
+    echo '</select>';
+}
+
+echo '<br>Choisissez une année :';
+generateMenu($startYear,$endYear);
+
+// boucle do while
+echo '<hr><h3> Boucle do while </h3><br>';
+// attention, le do s'execute avant la boucle, y'a donc une entree gratuite dans le bloc !
+// le do fait qu'elle s'execute au moins une fois, PUIS loop tant que la condition de sortie n'est pas remplie
+// A comprendre que contrairement au while, la structure signifie : FAIT tant que la CONDITION est vraie
+$j = 1;
+do {
+    echo "<br>J'ai fait $j tour(s) de boucle.<br>";
+    $j++;
+} while ($j > 10);
+/// Dans cet exemple la condition est false, mais on voit que la boucle a quand meme démarré
+
+// boucle for
+echo '<hr><h3> Boucle for </h3><br>';
+// La boucle for est une autre syntaxe de la boucle while
+for ($i=0;$i <= 10;$i++){
+    echo "<br>Je suis l'iteration $i de for.<br>";
+}
+
+// Exercice :
+// Afficher les mois de 1 à 12 dans un menu deroulant avec une boucle for
+$Mois = ['Janvier','Fevier','Mars','Avril','Mai','Juin','Juillet','Aout','Septembre','Octobre','Novembre','Decembre'];
+$idx = 1;
+for ($i=0;$i < sizeof($Mois);$i++){
+    echo "Mois $idx : $Mois[$i]<br>";
+    $idx++;
+}
+
+// Exercice : une boucle qui affiche 0 à 9 sur la meme ligne dans une table html
+/* echo <table>
+echo <tr>; -- debut d'une ligne
+    echo <td> contenu </td> -- une cell (table data)
+echo </tr>;
+echo </table>
+*/
+function tableThis($To){
+    echo '<br><table>';
+    echo '<tr>';
+    for ($i=0; $i <= $To; $i++){
+        echo "<td style='border: solid 1px'>$i</td>";
+    }
+    echo '</tr>';
+    echo '</table><br>';
+}
+
+$num = 9;
+#$num = readline("Tableau jusqu'a ?"); fun TODO : caler une input  
+tableThis($num);
+
+// Exercice : faites une boucle qui affiche de 0 à 9 sur la meme ligne, repetée sur 10 lignes dans une table html
+function tableThisTen($To){
+    echo '<br><table>';
+    for ($i=0; $i <= 10; $i++){
+        echo '<tr>';
+        for ($j=0; $j <= $To; $j++){
+            echo "<td style='border: solid 1px'>$j</td>";
+        }
+        echo '</tr>';
+    }
+    echo '</table><br>';
+}
+
+tableThisTen($num);
+
+// la meme en remplissant les valeurs jusqu'a 99
+$z=0;
+echo '<br><table>';
+for ($j=0; $j<10;$j++) {
+    echo '<tr>';
+    for ($i=0;$i<=9;$i++) {
+        echo '<td>'.$z.'</td>';
+        $z++;
+    }
+    echo '</tr>';
+}
+echo '</table>';
+
+?>
+
+<?php
+echo '<hr><h2> Les tableaux (arrays) </h2><br>';
+// Un tableau (ou array en anglais) est une variable améliorée dans laquelle on peut stocker une multitude de valeurs, ces valeurs peuvent etre de n'importe quel type et possedent un indice (index) dont la numerotation commence à 0
+// declaration d'un tableau, 
+// Methode 1:
+$liste = array('Gregoire','Nathalie','Emilie','François','Georges');
+echo 'type de la variable liste : '.gettype($liste).' - yep, en php ce n\'est pas un objet.<br>';
+// en php, on ne peut pas afficher tout le contenu de la liste en faisant un echo de cette dernieres (le langage ne sait pas le faire : erreur array to string conversion)
+// On peut contouner le probleme :
+echo '<pre>'; // Balise 'preformat' - peut servir pour la mise en page ( yum yum format json )
+var_dump($liste); # Affiche le contenu du tableau plus certaines infos comme le typage du contenu
+echo '</pre>';
+
+echo '<br><pre>';
+print_r($liste); # ne retourne que les index => valeurs
+echo '</pre>';
+// fonction personnelle d'affichage du print_r :
+function debug($param){
+    echo '<br><pre>';
+    echo "[Debug] Contenu :";
+    print_r($param);
+    echo '</pre>';
+} 
+debug($liste);
+
+// Methode 2:
+$tab=['France','Italie','Espagne','Portugal']; # Methode de declaration la plus recente
+// ajout d'une valeur en fin de liste :
+$tab[] = 'Suisse'; // liste[] permet d'append, les listes n'etant pas des objets en php on ne peut pas faire appel à une methode d'objet :D
+debug($tab);
+
+// afficher 'Espagne' en passant par le tableau :
+echo $tab[2].'<br>';
+
+/// Tableau associatif :
+// Dans un array associatif on peut choisir le nom des indices
+$couleur = array(
+    "j"=>"Jaune",
+    "b"=>"Bleu",
+    "v"=>"Vert"
+);
+// pour acceder à un element du tableau associatif :
+echo $couleur['j'].'<br>'; # retourne bien la valeur de j : jaune
+# exception de syntaxe :
+echo "la seconde couleur du tableau est $couleur[b]<br>"; // il faut retirer les quotes dans une interpo
 
 ?>
