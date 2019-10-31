@@ -30,3 +30,11 @@ Il s'agit d'un langage fonctionnel (reception / traitement de données -> foncti
         - constantes, operateurs arithmetiques
         - structures conditionnelles
         - conditions, switchs
+
+- J3 =
+    - les bases : 
+        - les arrays
+        - la boucle foreach
+        - array multidimensionnels
+        - les inclusions de fichiers
+        - methodes get et post

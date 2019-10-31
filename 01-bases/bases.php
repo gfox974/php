@@ -563,4 +563,102 @@ echo $couleur['j'].'<br>'; # retourne bien la valeur de j : jaune
 # exception de syntaxe :
 echo "la seconde couleur du tableau est $couleur[b]<br>"; // il faut retirer les quotes dans une interpo
 
+
+// mesurer la taille d'un array
+// n'etant pas un objet, un array n'a pas d'attribut lenght, on peut donc proceder de deux façons (meme si elles fonctionnent de la meme façon) :
+echo 'la taille de l\'array est de '.count($couleur).'<br>';
+echo 'la taille de l\'array est de '.sizeof($couleur).'<br>';
+
+?>
+
+<?php
+echo '<hr><h2> Boucle foreach </h2><br>';
+// La boucle foreach permet de parcourir un tableau de façon automatique, elle fonctionne uniquement sur les objets et les array
+debug($tab);
+// 1ere syntaxe (recupere la valeur)
+foreach($tab as $pays) { // structure "pour chacune" do (from $source AS $valeur parcourue)
+    echo $pays.'<br>';
+}
+// deuxieme syntaxe (recupere l'index en plus de la valeur)
+foreach($tab as $indice => $pays){ // l'index est donc la premiere variable, les valeurs la deuxieme
+    echo 'idx '.$indice.' = '.$pays.'<br>';
+}
+// Exercice : Declarer un array associatif, avec les indices "prenom" "nom" "email" "telephone" auquel on associe des valeurs (une seule personne, on verra le multidimension plus tard).
+// avec une boucle foreach, afficher les valeurs dans des paragraphes, SAUF le prenom qui doit etre dans un h3. 
+$jeanjacques = array(
+    "prenom"=>"Jean",
+    "nom"=>"Jacques",
+    "email"=>"jj@gmail.com",
+    "telephone"=>"0607080910"
+);
+foreach($jeanjacques as $indice => $info){
+    $balS= '<p>' ; $balE= '</p>';
+    if ($indice == 'prenom'){
+        $balS= '<h3>' ; $balE= '</h3>';
+    }
+    echo $balS.$info.$balE;
+}
+
+echo '<hr><h2> Tableaux multi-dimensionnels </h2><br>';
+// Nous parlons de tableau multidimensionnel quand un tableau est contenu dans un autre tableau, chacun des tableaux represente une dimension
+// Declaration d'un array multidimensionnel:
+$tab_multi= array(
+    0 => array(
+        'prenom' => 'Julien',
+        'nom' => 'Dupont',
+        'telephone' => '01....'
+    ),
+    1 => array(
+        'prenom' => 'Nicolas',
+        'nom' => 'Duran',
+        'telephone' => '06....'
+    ),
+    2 => array(
+        'prenom' => 'Pierre',
+        'nom' => 'Dulac',
+    ),
+);
+
+debug($tab_multi);
+// afficher la valeur de julien
+echo $tab_multi[0]['prenom'].'<hr>'; # On descends donc d'abord dans l'indice 0, puis on lit l'indice prenom, on change donc de niveau de données
+
+// Pour parcourir le tableau multidimensionnel, nous pouvons utiliser une boucle for car les indices sont numeriques
+for ($i=0;$i<count($tab_multi);$i++){ # tant que $i est inferieur au nombre d'elements contenus dans tab_multi (3), on boucle. 
+    echo $tab_multi[$i]['prenom'].'<br>'; # $i passe de 0 à 2, on affiche donc successivement la valeur de $i au passage, donc les trois prenoms
+}
+
+// Exercice : Afficher les trois prenoms avec une boucle foreach
+// 1st v
+foreach ($tab_multi as $valeur){
+    echo $valeur['prenom'].'<br>'; # $valeur contient à chaque tour le sous-array dans lequel on va chercher directement l'indice 'prenom'
+}
+// 2nd v
+foreach ($tab_multi as $indice => $valeur){
+    echo $tab_multi[$indice]['prenom'].'<br>'; # Dans cette version on passe par le premier tableau ($tab_multi), il faut donc indiquer tous les indices pour arriver au prenom
+}
+
+
+echo '<hr><h2> Les inclusions de fichiers </h2><br>';
+
+echo '<br> Premiere inclusion :';
+include('./exemple.inc.php'); #Fait l'inclusion du fichier dont le chemin est specifié, le .inc dans le nom est un indicatif precisant que le fichier est destiné à etre inclus. ( norme, pas obligatoire coté fonctionnel)
+
+echo '<br> Deuxieme inclusion :';
+include_once './exemple.inc.php'; # Ici ne retourne rien, car il y a verification de si l'include a deja été effectué, si c'est le cas il ne le réinclus pas
+// nota bene : pas de notion d'import implicite en php, c'est tout le fichier ou rien ..
+
+echo '<br> Troisieme inclusion :'; # Ne pas mixer require et les includes.
+/*
+require './exemple.inc.php'; # L'include de base continue l'execution meme si l'import foire, en require non, en cas d'erreur d'inclusion c'est erreur fatale -> stop (au lieu d'un warning et yolo je continue).
+
+echo '<br> Quatrieme inclusion :';
+require_once './exemple.inc.php'; # Mix des deux, evidemment.
+*/
+
+
+
+# isImported est present dans la lib :
+isImported();
+
 ?>
