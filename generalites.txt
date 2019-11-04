@@ -38,3 +38,10 @@ Il s'agit d'un langage fonctionnel (reception / traitement de données -> foncti
         - array multidimensionnels
         - les inclusions de fichiers
         - methodes get et post
+
+- J4 =
+    - POST : presentation - exercices
+    - COOKIES
+    - SESSIONS
+    - introduction aux objets
+    - PDO : connexion à la bdd

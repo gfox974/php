@@ -662,3 +662,26 @@ require_once './exemple.inc.php'; # Mix des deux, evidemment.
 isImported();
 
 ?>
+
+<?php 
+echo '<hr><h2> Introduction aux objets </h2><br>';
+/* Un objet est un autre type de données, il represente un objet reel doté d'attributs, proprietés et autres, auquel on peut associer des variables (proprietés), et des fonctions (methodes)
+pour creer des objets, il nous faut un plan de construction : c'est le role de la classe.
+dans notre exemple ci-dessous, nous allons creer une classe pour creer des objets "meubles".
+*/
+
+class Meuble{
+    public $marque='Ikea'; # public rends la proprieté $marque publique, elle sera donc accessible de partout, meme hors objet de classe
+
+    public function prix(){ // pour l'exemple de methode, prix retourne un prix entre 50 et 200 balles.
+        return rand(50,200).'€';
+    }
+    // Une classe est un template qui incorpore des proprietés et des methodes communes, ainsi en créant un objet à partir de cette classe, cet objet possedera des caracteristiques types
+}
+
+$table= new Meuble(); // le mot clé new permet de créer une nouvelle instance d'objet à partir de la classe meuble
+# On va maintenant afficher la proprieté marque, et le prix de l'objet table
+echo 'Marque de notre table: '.$table->marque.'<br>'; # en php on s'adresse aux proprietés par le biais de -> proprieté (sans le $)
+echo 'Prix de notre table: '.$table->prix().'<br>'; # :: passe pour l'appel à la methode déclarée en public mais dans le cas present utiliser ->
+
+?>
