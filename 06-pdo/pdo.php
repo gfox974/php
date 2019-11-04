@@ -46,4 +46,5 @@ Supprimer tous les enregistrements de la table employes dont le prenom est test 
 
 $deletethis= $pdo->exec("DELETE FROM employes where prenom='test';");
 echo 'Nb de lignes affectées par la requete $deletethis : '.$deletethis.'<br>';
+
 ?>
