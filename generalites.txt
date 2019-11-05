@@ -45,3 +45,14 @@ Il s'agit d'un langage fonctionnel (reception / traitement de données -> foncti
     - SESSIONS
     - introduction aux objets
     - PDO : connexion à la bdd
+
+ - J5 = 
+    - la methode query() avec un seul resultat
+    - exercices
+    - la methode query avec plusieurs resultats
+    - la methode fetchall()
+    - exercices
+    - afficher dynamiquement les resultats dans une table html
+    - requete preparée et bindparam()
+    - exercices
+    - requete preparée et bindvalue()
