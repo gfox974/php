@@ -56,3 +56,18 @@ Il s'agit d'un langage fonctionnel (reception / traitement de données -> foncti
     - requete preparée et bindparam()
     - exercices
     - requete preparée et bindvalue()
+
+ - J6 =
+    - PDO :
+        - requetes preparées : complements
+        - presentation de mysqli
+
+    - approche securité des formulaires / requetes (injections sql & exploit xss)
+    - validation de formulaires
+    
+    - site ecommerce :
+        - creation de la bdd
+        - init.php
+        - functions.php
+        - header.php et footer.php
+        - creation page de test

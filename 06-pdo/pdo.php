@@ -234,4 +234,48 @@ $resultat->execute();
 $employe = $resultat->fetch(PDO::FETCH_ASSOC);
 echo 'Je suis '.$employe['prenom'].' '.$employe['nom'].' du service : '.$employe['service'].'.';
 
+//----------------------------------------------------------------------------------
+echo '<h2> 10) Requetes préparées : points complémentaires </h2>';
+//----------------------------------------------------------------------------------
+echo '<h3> le marqueur "?" </h3>';
+
+$resultat= $pdo->prepare('select * from employes where nom = ? and prenom = ?;');
+$resultat->bindValue(1,'durand'); # ici, on assigne la valeur du premier "?" en le representant par l'int 1
+$resultat->bindValue(2,'damien'); # ici, on assigne la valeur du second "?" en le representant par l'int 2
+$resultat->execute();
+
+// On peut aussi utiliser la syntaxe suivante pour faire la meme chose :
+$resultat->execute(array('durand','damien'));
+
+$employe= $resultat->fetch(PDO::FETCH_ASSOC);
+echo 'Je suis '.$employe['prenom'].' '.$employe['nom'].' du service : '.$employe['service'].'.';
+
+
+//
+echo '<br><h3> Utiliser des marqueurs nominatifs sans bindParam() ni bindValue() </h3>';
+
+$resultat= $pdo->prepare('select * from employes where nom = :nom and prenom = :prenom ;');
+$resultat->execute(array(
+                        ':nom' => 'chevel',
+                        ':prenom' => 'daniel'
+                        )); // On peut associer directement les marqueurs et les valeurs par le biais d'un array associatif dans l'execute
+
+$employe= $resultat->fetch(PDO::FETCH_ASSOC);
+echo 'Je suis '.$employe['prenom'].' '.$employe['nom'].' du service : '.$employe['service'].'.';
+
+//----------------------------------------------------------------------------------
+echo "<h2> 11) L'extension Mysqli </h2>";
+//----------------------------------------------------------------------------------
+// Il existe une autre methode de connection à une bdd pour effectuer des requetes : l'extension Mysqli
+// Exemple :
+$Mysqli = new mysqli(
+    'localhost',
+    'root',
+    '',
+    'entreprise'
+);
+$resultat= $mysqli->query('select * from employes');
+
+// Notez que les objets $mysqli et $resultat ci-dessus possedent des proprietés et des methodes totalement differentes de pdo, on ne peut donc pas melanger ces objets les uns avec les autres
+
 ?>
