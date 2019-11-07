@@ -64,10 +64,14 @@ Il s'agit d'un langage fonctionnel (reception / traitement de données -> foncti
 
     - approche securité des formulaires / requetes (injections sql & exploit xss)
     - validation de formulaires
-    
+
+ - J7 =
+    - validation de formulaire : le champ date
+
     - site ecommerce :
         - creation de la bdd
         - init.php
         - functions.php
         - header.php et footer.php
         - creation page de test
+        - inscription.php
