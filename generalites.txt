@@ -75,3 +75,10 @@ Il s'agit d'un langage fonctionnel (reception / traitement de données -> foncti
         - header.php et footer.php
         - creation page de test
         - inscription.php
+
+ - J8 =
+    - site ecommerce:
+        - inscription.php : message a l'internaute
+        - connection.php
+        - profil.php
+        - debut gestion_boutique.php

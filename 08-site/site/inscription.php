@@ -6,7 +6,7 @@ require_once 'inc/init.php';
 $affiche_formulaire = TRUE; # On va donc set une variable pour gerer cet etat
 
 // Partie : Traitement du POST
-debug($_POST);
+#debug($_POST);
 if ($_POST){ # Si le formulaire a été rempli,
 # -> Validation du formulaire ( 9 conditions, vu qu'il y a 9 champs)
     # regles pseudo
@@ -70,6 +70,11 @@ if ($_POST){ # Si le formulaire a été rempli,
                     ':adresse' => $_POST['adresse']
                 )
             );
+            if ($succes){
+                $contenu .= '<div class="alert alert-success">Vous etes inscrit, <a href="connection.php">Cliquez ici pour vous connecter</a></div>';
+            } else {
+                $contenu .= '<div class="alert alert-danger"> Erreur lors de l\'inscription </div>';
+            }
         }
     } # fin du if empty contenu
 } # close if post
