@@ -102,15 +102,26 @@ if($_POST) {
 			$fichier_photo = "contact_" .$id.$ext; // partie rename du fichier
 			$photo_bdd = "photos/" . $fichier_photo; // set du path -> file
 			copy($_FILES["photo"]["tmp_name"], $photo_bdd); // on recupere le tmp uploadé et on le colle dans l'arbo definie
-			// Partie 6  (wip) - crea d'une miniature
-			$sourceImg = $photo_bdd; // On indique l'image source
-			echo debug(getimagesize($sourceImg)); // Là on recupere les valeurs des attributs de l'image sous forme d'array
-			$srcVals = array(getimagesize($sourceImg));
-			echo $srcVals[0][3]; // Là on isole les width/height de l'image, soit un string: "width="480" height="480"" 
-			
-			echo getimagesize($sourceImg)[0]; // retourne width
-			echo getimagesize($sourceImg)[1]; // retourne height
-			
+			// Partie 6  (apres le copy imposé - mais là ce serait mixable dans un meme bloc si on fait d'une pierre deux coups avant le copy du tmp ) - crea d'une miniature
+			$file = $_FILES['photo']['tmp_name']; 
+			$sourceProperties = getimagesize($file);
+			$fileNewName = "thumbnail_";
+			$folderPath = "minis/";
+			$ext = pathinfo($_FILES['photo']['name'], PATHINFO_EXTENSION);
+			$imageType = $sourceProperties[2];
+			switch ($imageType) { // case au lieu de if si on veut ajouter d'autres types
+				case IMAGETYPE_PNG:
+					$imageResourceId = imagecreatefrompng($file); 
+					$targetLayer = imageResize($imageResourceId,$sourceProperties[0],$sourceProperties[1]);
+					imagepng($targetLayer,$folderPath.$fileNewName.$id.".".$ext);
+				break;
+				default:
+					$imageResourceId = imagecreatefromjpeg($file); 
+					$targetLayer = imageResize($imageResourceId,$sourceProperties[0],$sourceProperties[1]);
+					imagejpeg($targetLayer,$folderPath.$fileNewName.$id.".".$ext);
+				break;
+			}
+			echo "Resize OK";
 		}
 	}
 	// traitements

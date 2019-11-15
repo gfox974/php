@@ -1,5 +1,4 @@
 <?php
-
 function debug($param){
     echo '<pre>';
         var_dump($param);
@@ -21,5 +20,13 @@ function execute_Requete($requete, $params = array()){ # Là en guise de paramet
     } else {
         return FALSE; # si false : good pseudo dispo !
     }
+}
+
+function imageResize($imageSource,$width,$height) {
+    $thumbWidth = $width/2;
+    $thumbHeight =$height/2;
+    $thumb=imagecreatetruecolor($thumbWidth,$thumbHeight);
+    imagecopyresampled($thumb,$imageSource,0,0,0,0,$thumbWidth,$thumbHeight, $width,$height);
+    return $thumb;
 }
 ?>

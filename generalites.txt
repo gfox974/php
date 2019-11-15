@@ -82,3 +82,10 @@ Il s'agit d'un langage fonctionnel (reception / traitement de données -> foncti
         - connection.php
         - profil.php
         - debut gestion_boutique.php
+
+    
+ - J11 =
+    - creation d'un repertoire de contact :
+    - liste_contact.php ; correction
+    - exercice : upload d'une photo redimensionnée 
+    - mise en ligne du projet
