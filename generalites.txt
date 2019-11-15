@@ -89,3 +89,6 @@ Il s'agit d'un langage fonctionnel (reception / traitement de données -> foncti
     - liste_contact.php ; correction
     - exercice : upload d'une photo redimensionnée 
     - mise en ligne du projet
+
+    Mise en ligne :
+    on va utiliser l'hebergeur : https://infinityfree.net

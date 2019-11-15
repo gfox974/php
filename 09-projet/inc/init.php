@@ -1,7 +1,7 @@
 <?php
 // Ce fichier sera inclus dans tous les scripts (hors les inclusions) pour initialiser les elements suivants :
 //    - la connection à la base de données:
-$pdo = new PDO("mysql:host=localhost;dbname=repertoire","root","", array(
+$pdo = new PDO("mysql:host=sql311.epizy.com;dbname=epiz_24799830_repertoire","epiz_24799830","QuVt554mGxelU", array(
     PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING,
     PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"
    ));

@@ -104,6 +104,8 @@ if ($_POST) {
 
 		copy($_FILES['photo']['tmp_name'], $photo); // on enregistre la photo sur notre serveur
 
+
+
 		// insertion du chemin de la photo en BDD :
 		$resultat = $pdo->exec("UPDATE contact SET photo = '$photo' WHERE id_contact = '$id_contact'"); // note : les variables sont entre quotes en SQL
 
@@ -112,7 +114,16 @@ if ($_POST) {
 		} else {
 			$contenu .= 'Erreur lors de l\'ajout du contact.';
 		}
-
+		// partie thumbnails (creation de la vignette)
+		$filename = $photo;
+		$percent = 0.5;
+		list($width, $height) = getimagesize($filename); // on crée une liste dont on affecte les valeurs a partir des valeurs de l'array retourné par la fonction
+		$new_width = $width * $percent;
+		$new_height = $height * $percent;
+		$image_p = imagecreatetruecolor($new_width,$new_height); // là on crée un fichier image vide (noire) aux bonnes dimensions
+		$image = imagecreatefromjpeg($filename); // retourne un identifiant de l'image dont le pointeur est filename, representant l'image d'origine
+		imagecopyresampled($image_p,$image,0,0,0,0,$new_width,$new_height,$width,$height); // redimensionne une copie de $image vers une image $image_p, depuis les dimensions width/height vers les new, les quatre 0 representent les points de departs en abcisses / ordonnées des coins à partir desquels ont part 
+		imagejpeg($image_p,'photo/thumbnail_'.$id_contact.'.jpg',100); // là on out l'image resizée vers un fichier
 
 	} // fin du if (empty($contenu))
 

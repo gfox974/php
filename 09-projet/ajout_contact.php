@@ -33,9 +33,9 @@
 6) WIP
 */
 require_once 'inc/init.php';
-debug($_POST);
+//debug($_POST);
 
-debug($_FILES);
+//debug($_FILES);
 
 // verifications
 if($_POST) {
@@ -81,22 +81,22 @@ if($_POST) {
 				$next_id = $get_id->fetch(PDO::FETCH_NUM);
 				$id= $next_id[0];
 			} else {
-				echo 'soucis id';
+				$contenu .= 'soucis id';
 			}
 			// partie set extension
 			$ext ="";
 			switch ($_FILES["photo"]["type"]) {
 				case 'image/png':
 					$ext =".png";
-					echo 'match png';
+					//echo 'match png';
 					break;
 				case 'image/jpeg':
 					$ext =".jpeg";
-					echo 'match jpeg';
+					//echo 'match jpeg';
 					break;
 				default:
 					$ext =".jpg";
-					echo 'match default';
+					//echo 'match default';
 					break;
 			}
 			$fichier_photo = "contact_" .$id.$ext; // partie rename du fichier
@@ -121,7 +121,7 @@ if($_POST) {
 					imagejpeg($targetLayer,$folderPath.$fileNewName.$id.".".$ext);
 				break;
 			}
-			echo "Resize OK";
+			//echo "Resize OK";
 		}
 	}
 	// traitements
@@ -150,6 +150,7 @@ if($_POST) {
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.1.2/tailwind.min.css'/>
 	   <!-- Lien vers le cdn bootstrap -->
 	   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
@@ -167,6 +168,7 @@ if($_POST) {
 <?php
 echo $contenu;
 ?>
+<!--
 <form method="post" action="" enctype="multipart/form-data" style="text-align:center;">
 
 	<label for="nom">Nom</label><br>
@@ -192,9 +194,48 @@ echo $contenu;
     <label for="photo">Photo</label><br>
 	<input type="file" name="photo" id="photo" accept=".jpg, .jpeg, .png"><br>
 
-    <input type="submit" value="enregistrer" class="btn" role="button">
+    <input type="submit" value="enregistrer" class="btn btn-primary" role="button">
 
 </form>
+-->
+    
+<div class="leading-loose">
+  <form class="max-w-xl m-4 p-10 bg-white rounded shadow-xl" method="post" action="" enctype="multipart/form-data">
+    <p class="text-gray-800 font-medium">Ajouter un contact</p>
+    <div class="inline-block mt-2 w-1/2 pr-1">
+      <label class="hidden block text-sm text-gray-600" for="nom">Nom</label>
+      <input class="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded" id="nom" name="nom" type="text" required="" placeholder="Nom" aria-label="Name">
+    </div>
+    <div class="inline-block mt-2 -mx-1 pl-1 w-1/2">
+      <label class="hidden block text-sm text-gray-600" for="prenom">Prenom</label>
+      <input class="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded" id="prenom"  name="prenom" type="text" required="" placeholder="Prénom" aria-label="Name">
+    </div>
+    <div class="">
+      <label class="block text-sm text-gray-00" for="telephone">Numero tel.</label>
+      <input class="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded" id="telephone" name="telephone" type="text" required="" placeholder="N° tel." aria-label="Email" pattern="[0-9]{10}">
+    </div>
+    <div class="mt-2">
+      <label class="block text-sm text-gray-600" for="email">Email</label>
+      <input class="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded" id="email" name="email" type="address" required="" placeholder="Adresse mail" aria-label="Email">
+    </div>
+    <div class="mt-2">
+      <label class=" block text-sm text-gray-600" for="type_contact">Type de contact</label>
+      <select class="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded" name="type_contact" id="type_contact">
+        <option value="ami">Ami</option>
+        <option value="famille">Famille</option>
+        <option value="professionnel">Professionnel</option>
+        <option value="autre">Autre</option>
+    </select><br>
+    </div>
+    <div class="mt-2">
+      <label class="text-sm block text-gray-600" for="photo">Photo</label>
+      <input class="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded" type="file" name="photo" id="photo" accept=".jpg, .jpeg, .png"><br>
+    </div>
+    <div class="mt-4">
+      <button class="px-4 py-1 text-white font-light tracking-wider bg-gray-900 rounded" type="submit" value="enregistrer"> Enregistrer </button>
+    </div>
+  </form>
+</div>
 
 </body>
 </html>
