@@ -1,0 +1,12 @@
+Planning du jour :
+9h45 - 13h45 evaluation pratique
+
+ - sujet sur la plateforme, evaluation backend sql/php
+    - 13h45 envoi du dossier sur la plateforme :
+        - fichiers, export bdd (projet prenom-nom)
+
+ - 15h15 qcm
+
+ -- crea bdd : immobilier
+ Table : logement 
+ Champs : - id_logement  - titre   - adresse  - ville   - cp   - surface   - prix   - photo - type (location ou vente)   - description 
